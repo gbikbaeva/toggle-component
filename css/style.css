@@ -1,5 +1,9 @@
 /* Put any custom CSS styles here.  */
 /* Be sure to delete the <style> tag in index.html if you want to use this stylesheet. */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont,
@@ -11,20 +15,119 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-* {
-  box-sizing: border-box;
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin: 0 auto;
+  padding: 200px 0;
 }
 
-.credits {
-  color: #777;
-  position: fixed;
-  bottom: 24px;
-  left: 24px;
-  font-size: 11px;
-  text-align: center;
+.toggle-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
 }
 
-.credits a {
-  color: #000;
-  font-weight: bold;
+.toggle-button {
+  position: relative;
+  display: inline-block;
+}
+
+.toggle-button input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-button__slider {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  border-radius: 9999px;
+  background-color: #e5e7eb;
+  border: 1px solid #e5e7eb;
+
+  transition: 0.4s;
+}
+
+.toggle-button__slider:before {
+  position: absolute;
+  content: '';
+
+  background: #ffffff;
+  border-radius: 9999px;
+  box-shadow: 0 1px 2px -1px rgb(0 0 0 / 0.10), 0 1px 3px 0 rgb(0 0 0 / 0.10);
+
+  transition: 0.4s;
+}
+
+input:checked + .toggle-button__slider {
+  background: #4338ca;
+  border: 1px solid #4338ca;
+}
+
+input:hover + .toggle-button__slider, input:focus + .toggle-button__slider {
+  outline: none;
+  background: #d1d5db;
+  box-shadow: 0 0 0 4px rgb(0.2666666805744171 0.2980392277240753 0.9058823585510254 / 0.12);
+  border: 1px solid #9ca3af;
+}
+
+input:checked:not(:disabled):hover + .toggle-button__slider,
+input:checked:not(:disabled):focus + .toggle-button__slider {
+  outline: none;
+  background: #3730a3;
+  box-shadow: 0 0 0 4px rgb(0.615686297416687 0.6431372761726379 0.6823529601097107 / 0.20);
+  border: 1px solid #4f46e5;
+}
+
+input:disabled + .toggle-button__slider {
+  pointer-events: none;
+  background: #f3f4f6;
+  border: 1px solid #f3f4f6;
+}
+
+input:disabled + .toggle-button__slider:before {
+  background: #d1d5db;
+}
+
+.toggle-button-size--sm {
+  width: 36px;
+  height: 20px;
+}
+
+.toggle-button-size--sm .toggle-button__slider:before {
+  left: 1px;
+  bottom: 1px;
+  width: 16px;
+  height: 16px;
+}
+
+.toggle-button-size--sm input:checked + .toggle-button__slider:before {
+  transform: translateX(16px);
+}
+
+.toggle-button-size--md {
+  width: 44px;
+  height: 24px;
+}
+
+.toggle-button-size--md .toggle-button__slider:before {
+  left: 1px;
+  bottom: 1px;
+  width: 20px;
+  height: 20px;
+}
+
+.toggle-button-size--md input:checked + .toggle-button__slider:before {
+  transform: translateX(20px);
 }
